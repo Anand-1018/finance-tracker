@@ -53,15 +53,15 @@ const deleteExpense = async (req,res)=>{
     }
 }
 
-const getAllExpenses = async (req,res)=>{
+const getAllExpenses = async (req, res) => {
     try {
-        
-        const {userId} = req.body;
+        const { userId } = req.body;
+        if (!userId) return res.send(error(400, "User ID required"));
+
         const user = await userModel.findById(userId).populate('expense_id');
-        
-        return res.send(success(200,user.expense_id.sort()));
+        return res.send(success(200, user.expense_id || []));
     } catch (e) {
-        return res.send(error(401,e.message))   
+        return res.send(error(500, e.message));
     }
 }
 
