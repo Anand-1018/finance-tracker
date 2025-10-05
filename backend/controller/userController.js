@@ -27,9 +27,9 @@ const loginController = async (req, res) => {
 
 const signupContorller = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { username, email, password } = req.body;
 
-        if (!name || !email || !password) {
+        if (!username || !email || !password) {
             return res.send(error(400, "Enter Every Field!!!"));
         }
 
@@ -38,13 +38,14 @@ const signupContorller = async (req, res) => {
             return res.send(error(409, "User with this email already exists"));
         }
 
-        const newUser = await userModel.create({ name, email, password });
+        const newUser = await userModel.create({ username, email, password });
         return res.send(success(201, "User is created"));
 
     } catch (err) {
         return res.send(error(500, err.message));
     }
 };
+;
 
 const logoutController = async (req, res) => {
     // optional: clear JWT or session if implemented later
