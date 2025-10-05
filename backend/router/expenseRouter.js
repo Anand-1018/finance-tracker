@@ -2,10 +2,10 @@ const { createExpense, deleteExpense, getCategoryExpense, getAllExpenses, emailS
 
 const router = require('express').Router();
 
-router.post('/addExpense',createExpense)
-router.post('/deleteExpense',deleteExpense)
+router.get('/addExpense',createExpense)
+router.get('/deleteExpense',deleteExpense)
 router.get('/categoryExpense',getCategoryExpense)
-router.post('/allExpenses',getAllExpenses)
-router.post('/sendEmail',emailSender);
+router.get('/allExpenses',getAllExpenses)
+router.get('/sendEmail',emailSender);
 
 module.exports = router;
