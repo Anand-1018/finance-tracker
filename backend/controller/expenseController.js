@@ -56,12 +56,12 @@ const deleteExpense = async (req,res)=>{
 const getAllExpenses = async (req, res) => {
     try {
         const { userId } = req.body;
-        if (!userId) return res.send(error(400, "User ID required"));
+        if (!userId) return res.send({ statusCode: 200, message: [] });
 
         const user = await userModel.findById(userId).populate('expense_id');
-        return res.send(success(200, user.expense_id || []));
+        return res.send({ statusCode: 200, message: user?.expense_id || [] });
     } catch (e) {
-        return res.send(error(500, e.message));
+        return res.send({ statusCode: 500, message: e.message });
     }
 }
 
